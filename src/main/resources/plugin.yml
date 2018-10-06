@@ -1,0 +1,6 @@
+name: FakeInventories
+version: "1.0.0"
+api: ["1.0.7"]
+author: SupremeMortal
+description: Create fake inventories
+main: com.nukkitx.fakeinventories.FakeInventoriesPlugin
