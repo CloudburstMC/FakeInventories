@@ -17,3 +17,27 @@ Easily create fake inventories that players can interact with.
         ...
     }
 ``` 
+
+## Maven Dependency
+
+```xml
+    <repositories>
+        <repository>
+            <id>nukkitx-repo</id>
+            <url>https://repo.nukkitx.com/snapshot/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.nukkitx</groupId>
+            <artifactId>fakeinventories</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+```
+
+## Todo
+
+- Add Hopper inventory
