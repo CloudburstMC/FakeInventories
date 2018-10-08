@@ -1,5 +1,6 @@
 package com.nukkitx.fakeinventories;
 
+import cn.nukkit.Player;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
@@ -40,6 +41,8 @@ public class FakeInventoriesListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onTransaction(InventoryTransactionEvent event) {
         Map<FakeInventory, List<SlotChangeAction>> actions = new HashMap<>();
+        Player source = event.getTransaction().getSource();
+        long creationTime = event.getTransaction().getCreationTime();
         for (InventoryAction action : event.getTransaction().getActions()) {
             if (action instanceof SlotChangeAction) {
                 SlotChangeAction slotChange = (SlotChangeAction) action;
@@ -55,7 +58,7 @@ public class FakeInventoriesListener implements Listener {
         boolean cancel = false;
         for (Map.Entry<FakeInventory, List<SlotChangeAction>> entry : actions.entrySet()) {
             for (SlotChangeAction action : entry.getValue()) {
-                if (entry.getKey().onSlotChange(action)) {
+                if (entry.getKey().onSlotChange(source, action)) {
                     cancel = true;
                 }
             }

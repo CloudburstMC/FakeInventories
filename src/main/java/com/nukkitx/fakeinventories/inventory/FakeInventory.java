@@ -80,9 +80,9 @@ public abstract class FakeInventory extends ContainerInventory {
         listeners.remove(listener);
     }
 
-    public boolean onSlotChange(SlotChangeAction action) {
+    public boolean onSlotChange(Player source, SlotChangeAction action) {
         if (!listeners.isEmpty()) {
-            FakeSlotChangeEvent event = new FakeSlotChangeEvent(action);
+            FakeSlotChangeEvent event = new FakeSlotChangeEvent(source, this, action);
             for (FakeInventoryListener listener : listeners) {
                 listener.onSlotChange(event);
             }
