@@ -7,7 +7,7 @@
     <groupId>com.nukkitx</groupId>
     <artifactId>fakeinventories</artifactId>
     <name>Fake Inventories</name>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
 
     <licenses>
         <license>

@@ -30,15 +30,20 @@ public class FakeInventories {
         return Optional.empty();
     }
 
-    public FakeInventory createChestInventory() {
-        FakeInventory inventory = new ChestFakeInventory();
+    public ChestFakeInventory createChestInventory() {
+        ChestFakeInventory inventory = new ChestFakeInventory();
         inventories.add(inventory);
         return inventory;
     }
 
-    public FakeInventory createDoubleChestInventory() {
-        FakeInventory inventory = new DoubleChestFakeInventory();
+    public DoubleChestFakeInventory createDoubleChestInventory() {
+        DoubleChestFakeInventory inventory = new DoubleChestFakeInventory();
         inventories.add(inventory);
         return inventory;
+    }
+
+    public void removeFakeInventory(FakeInventory inventory) {
+        inventories.remove(inventory);
+
     }
 }

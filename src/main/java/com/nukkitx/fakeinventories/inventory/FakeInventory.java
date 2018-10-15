@@ -18,6 +18,7 @@ public abstract class FakeInventory extends ContainerInventory {
 
     protected final Map<Player, List<BlockVector3>> blockPositions = new HashMap<>();
     private final List<FakeInventoryListener> listeners = new CopyOnWriteArrayList<>();
+    private boolean closed = false;
 
     FakeInventory(InventoryType type) {
         super(null, type);
@@ -25,6 +26,7 @@ public abstract class FakeInventory extends ContainerInventory {
 
     @Override
     public void onOpen(Player who) {
+        checkForClosed();
         this.viewers.add(who);
 
         List<BlockVector3> blocks = onOpenBlock(who);
@@ -68,15 +70,18 @@ public abstract class FakeInventory extends ContainerInventory {
     }
 
     public List<BlockVector3> getPosition(Player player) {
+        checkForClosed();
         return blockPositions.getOrDefault(player, Collections.emptyList());
     }
 
     public void addListener(FakeInventoryListener listener) {
         Preconditions.checkNotNull(listener);
+        checkForClosed();
         listeners.add(listener);
     }
 
     public void removeListener(FakeInventoryListener listener) {
+        checkForClosed();
         listeners.remove(listener);
     }
 
@@ -89,5 +94,14 @@ public abstract class FakeInventory extends ContainerInventory {
             return event.isCancelled();
         }
         return false;
+    }
+
+    private void checkForClosed() {
+        Preconditions.checkState(!closed, "Already closed");
+    }
+
+    void close() {
+        Preconditions.checkState(!closed, "Already closed");
+        closed = true;
     }
 }

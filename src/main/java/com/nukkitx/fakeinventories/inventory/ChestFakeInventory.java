@@ -18,7 +18,7 @@ import java.nio.ByteOrder;
 import java.util.Collections;
 import java.util.List;
 
-class ChestFakeInventory extends FakeInventory {
+public class ChestFakeInventory extends FakeInventory {
     @Getter
     @Setter
     private String name;
