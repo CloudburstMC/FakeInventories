@@ -2,7 +2,7 @@
 
 Easily create fake inventories that players can interact with.
 
-##### [Download](https://ci.nukkitx.com/job/NukkitX/job/FakeInventories/job/master/)
+##### [Download](https://github.com/NukkitX/FakeInventories/releases)
 
 ## Usage
 
