@@ -13,6 +13,8 @@ public class FakeInventoriesPlugin extends PluginBase {
         getServer().getServiceManager().register(FakeInventories.class, fakeInventories, this, ServicePriority.HIGHEST);
 
         getServer().getCommandMap().register("fakeinventories", new FakeInventoriesCommand(fakeInventories));
+
+        getServer().getPluginManager().registerEvents(new FakeInventoriesListener(fakeInventories), this);
     }
 
     @Override

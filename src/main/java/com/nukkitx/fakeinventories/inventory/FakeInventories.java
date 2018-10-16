@@ -44,6 +44,6 @@ public class FakeInventories {
 
     public void removeFakeInventory(FakeInventory inventory) {
         inventories.remove(inventory);
-
+        inventory.close();
     }
 }
