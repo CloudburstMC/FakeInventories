@@ -17,7 +17,6 @@ pipeline {
             }
             post {
                 success {
-                    junit 'target/surefire-reports/**/*.xml'
                     archiveArtifacts artifacts: 'target/fakeinventories-*.jar', fingerprint: true
                 }
             }
