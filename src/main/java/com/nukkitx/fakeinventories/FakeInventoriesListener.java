@@ -29,12 +29,16 @@ public class FakeInventoriesListener implements Listener {
         DataPacket packet = event.getPacket();
         if (packet instanceof UpdateBlockPacket) {
             UpdateBlockPacket updateBlock = (UpdateBlockPacket) packet;
-            for (BlockVector3 pos : fakeInventories.getFakeInventoryPositions(event.getPlayer())) {
-                if (pos.x == updateBlock.x && pos.y == updateBlock.y && pos.z == updateBlock.z) {
-                    event.setCancelled();
-                    return;
+            List<BlockVector3> positions = fakeInventories.getFakeInventoryPositions(event.getPlayer());
+            if (positions != null) {
+                for (BlockVector3 pos : positions) {
+                    if (pos.x == updateBlock.x && pos.y == updateBlock.y && pos.z == updateBlock.z) {
+                        event.setCancelled();
+                        return;
+                    }
                 }
             }
+            ;
         }
     }
 
