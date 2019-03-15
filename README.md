@@ -32,7 +32,7 @@ Easily create fake inventories that players can interact with.
         <dependency>
             <groupId>com.nukkitx</groupId>
             <artifactId>fakeinventories</artifactId>
-            <version>1.0.2-SNAPSHOT</version>
+            <version>1.0.2</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
