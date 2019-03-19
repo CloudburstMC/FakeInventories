@@ -3,15 +3,10 @@ package com.nukkitx.fakeinventories.inventory;
 import cn.nukkit.Player;
 import cn.nukkit.math.BlockVector3;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class FakeInventories {
-    private final Set<FakeInventory> inventories = Collections.newSetFromMap(new ConcurrentHashMap<>());
-
     public List<BlockVector3> getFakeInventoryPositions(Player player) {
         FakeInventory inventory = FakeInventory.open.get(player);
         if (inventory == null) {
@@ -30,9 +25,7 @@ public class FakeInventories {
      */
     @Deprecated
     public ChestFakeInventory createChestInventory() {
-        ChestFakeInventory inventory = new ChestFakeInventory();
-        inventories.add(inventory);
-        return inventory;
+        return new ChestFakeInventory();
     }
 
     /**
@@ -41,13 +34,10 @@ public class FakeInventories {
      */
     @Deprecated
     public DoubleChestFakeInventory createDoubleChestInventory() {
-        DoubleChestFakeInventory inventory = new DoubleChestFakeInventory();
-        inventories.add(inventory);
-        return inventory;
+        return new DoubleChestFakeInventory();
     }
 
     public void removeFakeInventory(FakeInventory inventory) {
-        inventories.remove(inventory);
         inventory.close();
     }
 }

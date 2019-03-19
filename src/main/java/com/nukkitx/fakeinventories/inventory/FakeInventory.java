@@ -128,6 +128,7 @@ public abstract class FakeInventory extends ContainerInventory {
 
     void close() {
         Preconditions.checkState(!closed, "Already closed");
+        getViewers().forEach(player -> player.removeWindow(this));
         closed = true;
     }
 
