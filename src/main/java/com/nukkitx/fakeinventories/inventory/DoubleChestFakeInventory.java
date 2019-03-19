@@ -3,6 +3,7 @@ package com.nukkitx.fakeinventories.inventory;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.blockentity.BlockEntity;
+import cn.nukkit.inventory.InventoryHolder;
 import cn.nukkit.inventory.InventoryType;
 import cn.nukkit.math.BlockVector3;
 import cn.nukkit.nbt.NBTIO;
@@ -16,9 +17,18 @@ import java.util.List;
 
 public class DoubleChestFakeInventory extends ChestFakeInventory {
 
-    DoubleChestFakeInventory() {
-        super(InventoryType.DOUBLE_CHEST);
+    public DoubleChestFakeInventory() {
+        this(null);
     }
+
+    public DoubleChestFakeInventory(InventoryHolder holder) {
+        this(holder, null);
+    }
+
+    public DoubleChestFakeInventory(InventoryHolder holder, String title) {
+        super(InventoryType.DOUBLE_CHEST, holder, title);
+    }
+
 
     @Override
     public void onOpen(Player who) {

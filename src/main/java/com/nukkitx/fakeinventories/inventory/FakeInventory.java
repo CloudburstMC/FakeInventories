@@ -3,6 +3,7 @@ package com.nukkitx.fakeinventories.inventory;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.inventory.ContainerInventory;
+import cn.nukkit.inventory.InventoryHolder;
 import cn.nukkit.inventory.InventoryType;
 import cn.nukkit.inventory.transaction.action.SlotChangeAction;
 import cn.nukkit.level.GlobalBlockPalette;
@@ -25,10 +26,19 @@ public abstract class FakeInventory extends ContainerInventory {
     protected final Map<Player, List<BlockVector3>> blockPositions = new HashMap<>();
     private final List<FakeInventoryListener> listeners = new CopyOnWriteArrayList<>();
     private boolean closed = false;
-    private String title = type.getDefaultTitle();
+    private String title;
 
-    FakeInventory(InventoryType type) {
-        super(null, type);
+    public FakeInventory(InventoryType type) {
+        this(type, null);
+    }
+
+    public FakeInventory(InventoryType type, InventoryHolder holder) {
+        this(type, holder, null);
+    }
+
+    public FakeInventory(InventoryType type, InventoryHolder holder, String title) {
+        super(holder, type);
+        this.title = title == null ? type.getDefaultTitle() : title;
     }
 
     @Override

@@ -24,12 +24,22 @@ public class FakeInventories {
         return Optional.ofNullable(FakeInventory.open.get(player));
     }
 
+    /**
+     * @return Chest inventory
+     * @deprecated Use {@link ChestFakeInventory} constructor
+     */
+    @Deprecated
     public ChestFakeInventory createChestInventory() {
         ChestFakeInventory inventory = new ChestFakeInventory();
         inventories.add(inventory);
         return inventory;
     }
 
+    /**
+     * @return Double chest inventory
+     * @deprecated Use {@link DoubleChestFakeInventory} constructor
+     */
+    @Deprecated
     public DoubleChestFakeInventory createDoubleChestInventory() {
         DoubleChestFakeInventory inventory = new DoubleChestFakeInventory();
         inventories.add(inventory);

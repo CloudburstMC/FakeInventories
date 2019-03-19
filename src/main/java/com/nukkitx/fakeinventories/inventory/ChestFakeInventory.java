@@ -3,6 +3,7 @@ package com.nukkitx.fakeinventories.inventory;
 import cn.nukkit.Player;
 import cn.nukkit.block.BlockID;
 import cn.nukkit.blockentity.BlockEntity;
+import cn.nukkit.inventory.InventoryHolder;
 import cn.nukkit.inventory.InventoryType;
 import cn.nukkit.level.GlobalBlockPalette;
 import cn.nukkit.math.BlockVector3;
@@ -23,12 +24,20 @@ public class ChestFakeInventory extends FakeInventory {
     @Setter
     private String name;
 
-    ChestFakeInventory(InventoryType type) {
-        super(type);
+    public ChestFakeInventory() {
+        this(null);
     }
 
-    ChestFakeInventory() {
-        super(InventoryType.CHEST);
+    public ChestFakeInventory(InventoryHolder holder) {
+        this(holder, null);
+    }
+
+    public ChestFakeInventory(InventoryHolder holder, String title) {
+        super(InventoryType.CHEST, holder, title);
+    }
+
+    ChestFakeInventory(InventoryType type, InventoryHolder holder, String title) {
+        super(type, holder, title);
     }
 
     @Override
