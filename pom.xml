@@ -17,40 +17,6 @@
         </license>
     </licenses>
 
-    <organization>
-        <name>NukkitX</name>
-        <url>https://github.com/FakeInventories</url>
-    </organization>
-
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/NukkitX/FakeInventories/issues</url>
-    </issueManagement>
-
-    <ciManagement>
-        <system>Jenkins</system>
-        <url>https://ci.nukkitx.com/job/NukkitX/job/FakeInventories</url>
-    </ciManagement>
-
-    <scm>
-        <connection>scm:git:https://github.com/NukkitX/FakeInventories.git</connection>
-        <developerConnection>scm:git:git@github.com:NukkitX/FakeInventories.git</developerConnection>
-        <url>https://github.com/NukkitX/FakeInventories</url>
-    </scm>
-
-    <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>nukkitx-releases</name>
-            <url>https://repo.nukkitx.com/release</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>nukkitx-snapshots</name>
-            <url>https://repo.nukkitx.com/snapshot</url>
-        </snapshotRepository>
-    </distributionManagement>
-
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
