@@ -13,8 +13,6 @@ Easily create fake inventories that players can interact with.
         if (provider == null || provider.getProvider() == null) {
             this.getServer().getPluginManager().disablePlugin(this);
         }
-        
-        ...
     }
 ``` 
 
@@ -23,8 +21,8 @@ Easily create fake inventories that players can interact with.
 ```xml
     <repositories>
         <repository>
-            <id>nukkitx-repo</id>
-            <url>https://repo.nukkitx.com/snapshot/</url>
+            <id>NukkitX-repo</id>
+            <url>https://repo.opencollab.dev/</url>
         </repository>
     </repositories>
 
@@ -32,7 +30,7 @@ Easily create fake inventories that players can interact with.
         <dependency>
             <groupId>com.nukkitx</groupId>
             <artifactId>fakeinventories</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.4</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

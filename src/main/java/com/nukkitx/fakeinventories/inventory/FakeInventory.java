@@ -12,6 +12,8 @@ import cn.nukkit.math.Vector3;
 import cn.nukkit.network.protocol.ContainerOpenPacket;
 import cn.nukkit.network.protocol.UpdateBlockPacket;
 import com.google.common.base.Preconditions;
+import cn.nukkit.scheduler.NukkitRunnable;
+import com.nukkitx.fakeinventories.FakeInventoriesPlugin;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +24,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public abstract class FakeInventory extends ContainerInventory {
     private static final BlockVector3 ZERO = new BlockVector3(0, 0, 0);
 
-    static final Map<Player, FakeInventory> open = new ConcurrentHashMap<>();
+    protected static final Map<Player, FakeInventory> open = new ConcurrentHashMap<>();
 
     protected final Map<Player, List<BlockVector3>> blockPositions = new HashMap<>();
     private final List<FakeInventoryListener> listeners = new CopyOnWriteArrayList<>();
@@ -82,17 +84,22 @@ public abstract class FakeInventory extends ContainerInventory {
 
         for (int i = 0, size = blocks.size(); i < size; i++) {
             final int index = i;
-            Server.getInstance().getScheduler().scheduleDelayedTask(() -> {
-                Vector3 blockPosition = blocks.get(index).asVector3();
-                UpdateBlockPacket updateBlock = new UpdateBlockPacket();
-                updateBlock.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(who.getLevel().getBlock(blockPosition).getFullId());
-                updateBlock.flags = UpdateBlockPacket.FLAG_ALL_PRIORITY;
-                updateBlock.x = blockPosition.getFloorX();
-                updateBlock.y = blockPosition.getFloorY();
-                updateBlock.z = blockPosition.getFloorZ();
 
-                who.dataPacket(updateBlock);
-            }, 2 + i, false);
+            // Use NukkitRunnable to schedule the task
+            new NukkitRunnable() {
+                @Override
+                public void run() {
+                    Vector3 blockPosition = blocks.get(index).asVector3();
+                    UpdateBlockPacket updateBlock = new UpdateBlockPacket();
+                    updateBlock.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(who.getLevel().getBlock(blockPosition).getFullId());
+                    updateBlock.flags = UpdateBlockPacket.FLAG_ALL_PRIORITY;
+                    updateBlock.x = blockPosition.getFloorX();
+                    updateBlock.y = blockPosition.getFloorY();
+                    updateBlock.z = blockPosition.getFloorZ();
+
+                    who.dataPacket(updateBlock);
+                }
+            }.runTaskLater(FakeInventoriesPlugin.getInstance(), 2 + i);  // Use globally accessible plugin instance
         }
     }
 

@@ -7,7 +7,7 @@
     <groupId>com.nukkitx</groupId>
     <artifactId>fakeinventories</artifactId>
     <name>Fake Inventories</name>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.4-SNAPSHOT</version>
 
     <licenses>
         <license>
@@ -19,48 +19,52 @@
 
     <organization>
         <name>NukkitX</name>
-        <url>https://github.com/FakeInventories</url>
+        <url>https://github.com/CloudburstMC</url>
     </organization>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/NukkitX/FakeInventories/issues</url>
+        <url>https://github.com/CloudburstMC/FakeInventories/issues</url>
     </issueManagement>
 
     <ciManagement>
         <system>Jenkins</system>
-        <url>https://ci.nukkitx.com/job/NukkitX/job/FakeInventories</url>
+        <url>https://ci.opencollab.dev/job/NukkitX/job/FakeInventories/</url>
     </ciManagement>
 
     <scm>
-        <connection>scm:git:https://github.com/NukkitX/FakeInventories.git</connection>
-        <developerConnection>scm:git:git@github.com:NukkitX/FakeInventories.git</developerConnection>
-        <url>https://github.com/NukkitX/FakeInventories</url>
+        <connection>scm:git:https://github.com/CloudburstMC/FakeInventories.git</connection>
+        <developerConnection>scm:git:git@github.com:CloudburstMC/FakeInventories.git</developerConnection>
+        <url>https://github.com/CloudBurstMC/FakeInventories</url>
     </scm>
 
     <distributionManagement>
         <repository>
             <id>releases</id>
             <name>nukkitx-releases</name>
-            <url>https://repo.nukkitx.com/release</url>
+            <url>https://repo.opencollab.dev/maven-releases</url>
         </repository>
         <snapshotRepository>
             <id>snapshots</id>
             <name>nukkitx-snapshots</name>
-            <url>https://repo.nukkitx.com/snapshot</url>
+            <url>https://repo.opencollab.dev/maven-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <repositories>
         <repository>
-            <id>nukkitx-repo</id>
-            <url>https://repo.nukkitx.com/snapshot/</url>
+            <id>nukkitx-releases</id>
+            <url>https://repo.opencollab.dev/maven-releases</url>
+        </repository>
+        <repository>
+            <id>nukkitx-snapshots</id>
+            <url>https://repo.opencollab.dev/maven-snapshots</url>
         </repository>
     </repositories>
 
