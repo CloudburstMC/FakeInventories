@@ -78,7 +78,10 @@ public abstract class FakeInventory extends ContainerInventory {
         super.onClose(who);
         open.remove(who, this);
 
-        List<BlockVector3> blocks = blockPositions.get(who);
+        List<BlockVector3> blocks = blockPositions.remove(who);
+        if (blocks == null) {
+            return;
+        }
 
         for (int i = 0, size = blocks.size(); i < size; i++) {
             final int index = i;
