@@ -8,7 +8,6 @@ import cn.nukkit.inventory.InventoryType;
 import cn.nukkit.inventory.transaction.action.SlotChangeAction;
 import cn.nukkit.level.GlobalBlockPalette;
 import cn.nukkit.math.BlockVector3;
-import cn.nukkit.math.Vector3;
 import cn.nukkit.network.protocol.ContainerOpenPacket;
 import cn.nukkit.network.protocol.UpdateBlockPacket;
 import com.google.common.base.Preconditions;
@@ -83,13 +82,13 @@ public abstract class FakeInventory extends ContainerInventory {
         for (int i = 0, size = blocks.size(); i < size; i++) {
             final int index = i;
             Server.getInstance().getScheduler().scheduleDelayedTask(() -> {
-                Vector3 blockPosition = blocks.get(index).asVector3();
+                BlockVector3 blockPosition = blocks.get(index);
                 UpdateBlockPacket updateBlock = new UpdateBlockPacket();
-                updateBlock.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(who.getLevel().getBlock(blockPosition).getFullId());
+                updateBlock.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(who.getLevel().getFullBlock(blockPosition.x, blockPosition.y, blockPosition.z));
                 updateBlock.flags = UpdateBlockPacket.FLAG_ALL_PRIORITY;
-                updateBlock.x = blockPosition.getFloorX();
-                updateBlock.y = blockPosition.getFloorY();
-                updateBlock.z = blockPosition.getFloorZ();
+                updateBlock.x = blockPosition.getX();
+                updateBlock.y = blockPosition.getY();
+                updateBlock.z = blockPosition.getZ();
 
                 who.dataPacket(updateBlock);
             }, 2 + i, false);
