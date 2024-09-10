@@ -12,7 +12,6 @@ import cn.nukkit.math.Vector3;
 import cn.nukkit.network.protocol.ContainerOpenPacket;
 import cn.nukkit.network.protocol.UpdateBlockPacket;
 import com.google.common.base.Preconditions;
-import cn.nukkit.scheduler.NukkitRunnable;
 import com.nukkitx.fakeinventories.FakeInventoriesPlugin;
 
 import java.util.HashMap;
@@ -85,21 +84,18 @@ public abstract class FakeInventory extends ContainerInventory {
         for (int i = 0, size = blocks.size(); i < size; i++) {
             final int index = i;
 
-            // Use NukkitRunnable to schedule the task
-            new NukkitRunnable() {
-                @Override
-                public void run() {
-                    Vector3 blockPosition = blocks.get(index).asVector3();
-                    UpdateBlockPacket updateBlock = new UpdateBlockPacket();
-                    updateBlock.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(who.getLevel().getBlock(blockPosition).getFullId());
-                    updateBlock.flags = UpdateBlockPacket.FLAG_ALL_PRIORITY;
-                    updateBlock.x = blockPosition.getFloorX();
-                    updateBlock.y = blockPosition.getFloorY();
-                    updateBlock.z = blockPosition.getFloorZ();
+            // Use scheduleDelayedTask with the Plugin instance
+            Server.getInstance().getScheduler().scheduleDelayedTask(FakeInventoriesPlugin.getInstance(), () -> {
+                Vector3 blockPosition = blocks.get(index).asVector3();
+                UpdateBlockPacket updateBlock = new UpdateBlockPacket();
+                updateBlock.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(who.getLevel().getBlock(blockPosition).getFullId());
+                updateBlock.flags = UpdateBlockPacket.FLAG_ALL_PRIORITY;
+                updateBlock.x = blockPosition.getFloorX();
+                updateBlock.y = blockPosition.getFloorY();
+                updateBlock.z = blockPosition.getFloorZ();
 
-                    who.dataPacket(updateBlock);
-                }
-            }.runTaskLater(FakeInventoriesPlugin.getInstance(), 2 + i);  // Use globally accessible plugin instance
+                who.dataPacket(updateBlock);
+            }, 2 + i);
         }
     }
 
