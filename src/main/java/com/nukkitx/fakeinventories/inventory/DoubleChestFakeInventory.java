@@ -10,7 +10,6 @@ import cn.nukkit.nbt.NBTIO;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.network.protocol.BlockEntityDataPacket;
 import com.nukkitx.fakeinventories.FakeInventoriesPlugin;
-import cn.nukkit.scheduler.NukkitRunnable;
 
 import java.io.IOException;
 import java.nio.ByteOrder;
@@ -38,13 +37,10 @@ public class DoubleChestFakeInventory extends ChestFakeInventory {
         List<BlockVector3> blocks = onOpenBlock(who);
         blockPositions.put(who, blocks);
 
-        // Use NukkitRunnable to schedule the task
-        new NukkitRunnable() {
-            @Override
-            public void run() {
-                onFakeOpen(who, blocks);
-            }
-        }.runTaskLater(FakeInventoriesPlugin.getInstance(), 3);  // Use globally accessible plugin instance
+        // Use non-deprecated scheduleDelayedTask by passing the Plugin instance
+        Server.getInstance().getScheduler().scheduleDelayedTask(FakeInventoriesPlugin.getInstance(), () -> {
+            onFakeOpen(who, blocks);
+        }, 3);
     }
 
     @Override
