@@ -9,6 +9,7 @@ import cn.nukkit.math.BlockVector3;
 import cn.nukkit.nbt.NBTIO;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.network.protocol.BlockEntityDataPacket;
+import com.nukkitx.fakeinventories.FakeInventoriesPlugin;
 
 import java.io.IOException;
 import java.nio.ByteOrder;
@@ -29,7 +30,6 @@ public class DoubleChestFakeInventory extends ChestFakeInventory {
         super(InventoryType.DOUBLE_CHEST, holder, title);
     }
 
-
     @Override
     public void onOpen(Player who) {
         this.viewers.add(who);
@@ -37,7 +37,8 @@ public class DoubleChestFakeInventory extends ChestFakeInventory {
         List<BlockVector3> blocks = onOpenBlock(who);
         blockPositions.put(who, blocks);
 
-        Server.getInstance().getScheduler().scheduleDelayedTask(() -> {
+        // Use non-deprecated scheduleDelayedTask by passing the Plugin instance
+        Server.getInstance().getScheduler().scheduleDelayedTask(FakeInventoriesPlugin.getInstance(), () -> {
             onFakeOpen(who, blocks);
         }, 3);
     }
