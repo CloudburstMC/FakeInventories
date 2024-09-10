@@ -11,6 +11,7 @@ import cn.nukkit.math.BlockVector3;
 import cn.nukkit.network.protocol.ContainerOpenPacket;
 import cn.nukkit.network.protocol.UpdateBlockPacket;
 import com.google.common.base.Preconditions;
+import com.nukkitx.fakeinventories.FakeInventoriesPlugin; // Import Plugin
 
 import java.util.HashMap;
 import java.util.List;
@@ -84,7 +85,8 @@ public abstract class FakeInventory extends ContainerInventory {
 
         for (int i = 0, size = blocks.size(); i < size; i++) {
             final int index = i;
-            Server.getInstance().getScheduler().scheduleDelayedTask(() -> {
+            // Pass the plugin instance to scheduleDelayedTask
+            Server.getInstance().getScheduler().scheduleDelayedTask(FakeInventoriesPlugin.getInstance(), () -> {
                 BlockVector3 blockPosition = blocks.get(index);
                 UpdateBlockPacket updateBlock = new UpdateBlockPacket();
                 updateBlock.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(who.getLevel().getFullBlock(blockPosition.x, blockPosition.y, blockPosition.z));
